@@ -16,7 +16,7 @@ JOIN
 JOIN
     categorielieu cl ON ba.idcategorielieu = cl.idcategorielieu;
 
-CREATE VIEW vue_relationnelle AS
+/*CREATE VIEW vue_relationnelle AS
 SELECT
     ba.idbouquetactivite,
     ba.idbouquet,
@@ -34,7 +34,7 @@ JOIN bouquet b ON ba.idbouquet = b.idbouquet
 JOIN activite a ON ba.idactivite = a.idactivite
 JOIN categorielieu c ON ba.idcategorielieu = c.idcategorielieu
 JOIN detailbouquet_activite dba ON ba.idbouquetactivite = dba.idbouquetactivite;
-
+*/
 
 CREATE VIEW vue_voyage_detail AS
 SELECT

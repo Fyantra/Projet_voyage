@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -16,7 +17,7 @@ public class Connect {
     public Connection getConnectionPostGresql()throws Exception, ClassNotFoundException
     {
         Class.forName("org.postgresql.Driver");
-        Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/voyage","postgres","0000");
+        Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/voyage","postgres","B123");
         con.setAutoCommit(false);
         return con;
     }
