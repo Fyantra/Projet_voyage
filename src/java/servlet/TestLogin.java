@@ -42,11 +42,17 @@ public class TestLogin extends HttpServlet {
                 Utilisateur user = new Utilisateur();
                 Boolean testLogin = user.testLogin(email, mdp);
                 if(testLogin){
-                    response.sendRedirect("/InsererActivite.jsp");
+//                    response.sendRedirect("/InsererActivite.jsp");
+                    RequestDispatcher dispat = getServletContext().getRequestDispatcher("/insertActivite.jsp");
+
+                    dispat.forward(request, response);
                 } else{
                     String error = "Email introuvable ou mot de passe incorrect, veuillez reessayer";
                     request.setAttribute("error", error);
-                    response.sendRedirect("/login.jsp");
+//                    response.sendRedirect("/login.jsp");
+                     RequestDispatcher dispat = getServletContext().getRequestDispatcher("/login.jsp");
+
+                    dispat.forward(request, response);
                 }
 
             } catch (Exception e) {

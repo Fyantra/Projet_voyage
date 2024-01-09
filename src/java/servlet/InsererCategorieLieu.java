@@ -7,21 +7,18 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import objet.BouquetActivite;
-import objet.VueBouquetActivite;
+import objet.*;
 
 /**
  *
  * @author ITU
  */
-public class ListeBouquetActivite extends HttpServlet {
+public class InsererCategorieLieu extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,17 +34,18 @@ public class ListeBouquetActivite extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             try {
-                String idBouquet = request.getParameter("bouquet");
+                String description = request.getParameter("description");
 
-                VueBouquetActivite ba = new VueBouquetActivite();
-                List<VueBouquetActivite> lvba = ba.selectVueBouquetActiviteById(null, idBouquet);
+                System.out.println(description);
+                
+                CategorieLieu categ = new CategorieLieu(description);
+                categ.insertCategorieLieu(null);
+                // request.setAttribute("controleAnomalie", ctrl);
 
-                request.setAttribute("VueBouquetActivite", lvba);
-                request.setAttribute("formSubmitted", true);
-
-                RequestDispatcher dispat = getServletContext().getRequestDispatcher("/listeBouquetActivite.jsp");
+                RequestDispatcher dispat = getServletContext().getRequestDispatcher("/insertCategorieLieu.jsp");
 
                 dispat.forward(request, response);
+
             } catch (Exception e) {
                 request.setAttribute("exception", e);
 

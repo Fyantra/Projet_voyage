@@ -38,3 +38,24 @@ CREATE SEQUENCE utilisateurSequence
     CACHE 10
     CYCLE;
 
+CREATE SEQUENCE sejourSequence
+    INCREMENT 1
+    MINVALUE 1
+    START 1
+    CACHE 10
+    CYCLE;
+
+CREATE SEQUENCE voyageSequence
+    INCREMENT 1
+    MINVALUE 1
+    START 1
+    CACHE 10
+    CYCLE;
+
+CREATE SEQUENCE detailBouquet_activiteSequence
+    INCREMENT 1
+    MINVALUE 1
+    START 1
+    CACHE 10
+    CYCLE;
+

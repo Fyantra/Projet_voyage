@@ -15,11 +15,12 @@
     List<Activite> lactivite= activite.selectActivite(null);
     List<VueBouquetActivite> vba = new ArrayList();
 
-    Boolean formSubmitted = (Boolean) session.getAttribute("formSubmitted");
+    Boolean formSubmitted = (Boolean) request.getAttribute("formSubmitted");
 
     if (formSubmitted != null && formSubmitted) {
-        vba = (List<VueBouquetActivite>) session.getAttribute("VueBouquetActivite");
+        vba = (List<VueBouquetActivite>) request.getAttribute("VueBouquetActivite");
     }
+    int counter = 1;
 %>
 
 <%@ include file = "header.html" %>
@@ -89,7 +90,7 @@
                                                     for (VueBouquetActivite v : vba) {
                                                 %>
                                                         <tr>
-                                                            <td><%= v.getIdActivite() %></td>
+                                                            <td><%= counter++ %></td>
                                                             <td><span class="name"><%= v.getDescription_activite() %></span></td>
                                                         </tr>
                                                 <% 

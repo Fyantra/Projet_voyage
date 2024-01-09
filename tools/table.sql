@@ -56,6 +56,38 @@ CREATE TABLE bouquet_activite(
     idbouquetActivite VARCHAR(250) DEFAULT 'bouquet_activite' || nextval('bouquet_activiteSequence')::TEXT PRIMARY KEY,
     idbouquet VARCHAR(250),
     idactivite VARCHAR(250),
+    idcategorielieu VARCHAR(250),
     Foreign key (idbouquet) REFERENCES bouquet(idbouquet),
-    Foreign Key (idactivite) REFERENCES activite(idactivite)
+    Foreign Key (idactivite) REFERENCES activite(idactivite),
+    Foreign key (idcategorielieu) REFERENCES categorielieu(idcategorielieu)
 );
+
+---------------------------------------------------------------------------------------------------------------
+
+CREATE TABLE sejour(
+    idsejour VARCHAR(250) DEFAULT 'sejour' || nextval('sejourSequence')::TEXT PRIMARY KEY,
+    description VARCHAR(250),
+    jourmin integer,
+    jourmax integer
+);
+
+CREATE TABLE voyage(
+    idvoyage VARCHAR(250) DEFAULT 'voyage' || nextval('voyageSequence')::TEXT PRIMARY KEY,
+    idcategorielieu VARCHAR(250),
+    idbouquet VARCHAR(250),
+    idsejour VARCHAR(250),
+    Foreign key (idcategorielieu) REFERENCES categorielieu(idcategorielieu),
+    Foreign key (idbouquet) REFERENCES bouquet(idbouquet),
+    Foreign key (idsejour) REFERENCES sejour(idsejour)
+);
+
+CREATE TABLE detailBouquet_activite(
+    iddetailbouquetactivite VARCHAR(250) DEFAULT 'detailBouquet_activite' || nextval('detailBouquet_activiteSequence')::TEXT PRIMARY KEY,
+    idbouquetActivite VARCHAR(250),
+    idsejour VARCHAR(250),
+    nombreActivite int,
+    Foreign key (idbouquetActivite) REFERENCES bouquet_activite (idbouquetActivite),
+    Foreign key (idsejour) REFERENCES sejour (idsejour)
+);
+
+SELECT currval(pg_get_serial_sequence('bouquet_activite', 'idbouquetactivite')) as last_id;

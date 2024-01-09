@@ -14,14 +14,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import objet.BouquetActivite;
-import objet.VueBouquetActivite;
+import objet.*;
 
 /**
  *
  * @author ITU
  */
-public class ListeBouquetActivite extends HttpServlet {
+public class InsertVoyage extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,16 +37,15 @@ public class ListeBouquetActivite extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             try {
                 String idBouquet = request.getParameter("bouquet");
+                String idCategorieLieu = request.getParameter("categorielieu");
+                String sejour = request.getParameter("sejour");
 
-                VueBouquetActivite ba = new VueBouquetActivite();
-                List<VueBouquetActivite> lvba = ba.selectVueBouquetActiviteById(null, idBouquet);
 
-                request.setAttribute("VueBouquetActivite", lvba);
-                request.setAttribute("formSubmitted", true);
+                Voyage voyage = new Voyage(idCategorieLieu, idBouquet, sejour);
+                voyage.insertVoyage(null);
 
-                RequestDispatcher dispat = getServletContext().getRequestDispatcher("/listeBouquetActivite.jsp");
+                response.sendRedirect("insertVoyage.jsp");
 
-                dispat.forward(request, response);
             } catch (Exception e) {
                 request.setAttribute("exception", e);
 

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import objet.Bouquet;
 import objet.BouquetActivite;
+import objet.DetailBouquetActivite;
 
 /**
  *
@@ -38,13 +39,25 @@ public class InsertBouquetActivite extends HttpServlet {
          try (PrintWriter out = response.getWriter()) {
             try {
                 String idBouquet = request.getParameter("bouquet");
-                String[] idActivitesArray = request.getParameterValues("activites");
+                String idCategorieLieu = request.getParameter("categorielieu");
+                String idActivite = request.getParameter("activite");
 
+                 String[] idSejoursArray = request.getParameterValues("sejour");
+                String[] nombreActivitesArray = request.getParameterValues("nbactivite");
                 // Conversion du tableau de chaînes en liste de chaînes
-                List<String> idActivitesList = Arrays.asList(idActivitesArray);
+//                List<String> idActivitesList = Arrays.asList(idActivitesArray);
 
-                BouquetActivite ba = new BouquetActivite();
-                ba.insertBouquetActivite(idBouquet, idActivitesList);
+                BouquetActivite ba = new BouquetActivite(idBouquet, idActivite, idCategorieLieu);
+                ba.insertBouquetActivite(null);
+                
+                for (int i = 0; i < idSejoursArray.length; i++) {
+                    String idSejour = idSejoursArray[i];
+                    int nombreActivite = Integer.parseInt(nombreActivitesArray[i]);
+
+                    BouquetActivite newBa = ba.getLastBouquetActivite();
+                    DetailBouquetActivite detail = new DetailBouquetActivite(newBa.getIdBouquetActivite(),idSejour, nombreActivite);
+                    detail.insertDetailBouquetActivite(null);
+                }
 
                 response.sendRedirect("insertBouquetActivite.jsp");
 

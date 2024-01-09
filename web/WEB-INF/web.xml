@@ -20,6 +20,14 @@
         <servlet-name>TestLogin</servlet-name>
         <servlet-class>servlet.TestLogin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InsererCategorieLieu</servlet-name>
+        <servlet-class>servlet.InsererCategorieLieu</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InsertVoyage</servlet-name>
+        <servlet-class>servlet.InsertVoyage</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>InsererActivite</servlet-name>
         <url-pattern>/InsererActivite</url-pattern>
@@ -39,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>TestLogin</servlet-name>
         <url-pattern>/TestLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsererCategorieLieu</servlet-name>
+        <url-pattern>/InsererCategorieLieu</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertVoyage</servlet-name>
+        <url-pattern>/InsertVoyage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
