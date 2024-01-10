@@ -13,12 +13,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import objet.Activite;
+import objet.VoyageDetail;
+import java.util.List;
 
 /**
  *
  * @author ITU
  */
-public class InsererActivite extends HttpServlet {
+public class DetailVoyage extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,22 +33,25 @@ public class InsererActivite extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       response.setContentType("text/html;charset=UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             try {
-                String description = request.getParameter("description");
-                String pu = request.getParameter("pu");
-                double prixUnitaire = 0.0;
-                prixUnitaire = Double.parseDouble(pu);
+                String montant1 = request.getParameter("montant1");
+                String montant2 = request.getParameter("montant2");
+                double montantt1 = Double.parseDouble(montant1);
+                double montantt2 = Double.parseDouble(montant2);
                 
 //                System.out.println(description);
                 
-                Activite activite = new Activite(description, prixUnitaire);
-                activite.insertActivite(null);
+              VoyageDetail vd = new VoyageDetail();
+                List<VoyageDetail> lvd = vd.selectVoyageBetween2PU(null, montantt1, montantt2);
+             
+               request.setAttribute("listeVoyage", lvd);
+                request.setAttribute("formSubmitted", true);
+              
                 // request.setAttribute("controleAnomalie", ctrl);
 
-                RequestDispatcher dispat = getServletContext().getRequestDispatcher("/insertActivite.jsp");
+                RequestDispatcher dispat = getServletContext().getRequestDispatcher("/filtreActivite.jsp");
 
                 dispat.forward(request, response);
 

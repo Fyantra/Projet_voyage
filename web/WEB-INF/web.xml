@@ -28,6 +28,10 @@
         <servlet-name>InsertVoyage</servlet-name>
         <servlet-class>servlet.InsertVoyage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DetailVoyage</servlet-name>
+        <servlet-class>servlet.DetailVoyage</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>InsererActivite</servlet-name>
         <url-pattern>/InsererActivite</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>InsertVoyage</servlet-name>
         <url-pattern>/InsertVoyage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailVoyage</servlet-name>
+        <url-pattern>/DetailVoyage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

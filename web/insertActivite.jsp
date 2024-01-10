@@ -19,6 +19,11 @@
                                 <label for="cc-payment" class="control-label mb-1">Description de l`activite</label>
                                 <input id="cc-payment" name="description" type="text" class="form-control" required>
                             </div>
+
+                              <div class="form-group">
+                                <label for="cc-payment" class="control-label mb-1">Prix unitaire</label>
+                                <input id="cc-payment" name="pu" type="number" class="form-control" required>
+                            </div>
                             
                             <div>
                                 <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">

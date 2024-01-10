@@ -16,49 +16,37 @@ JOIN
 JOIN
     categorielieu cl ON ba.idcategorielieu = cl.idcategorielieu;
 
-CREATE VIEW vue_relationnelle AS
+
+CREATE or replace VIEW vue_bouquet_activite_detail AS
 SELECT
     ba.idbouquetactivite,
     ba.idbouquet,
     ba.idactivite,
     ba.idcategorielieu,
-    c.description AS categorielieu_description,
-    b.description AS bouquet_description,
-    a.description AS activite_description
-    -- dba.iddetailbouquetactivite,
-    -- dba.idsejour,
-    -- dba.nombreactivite
+    dba.iddetailbouquetactivite,
+    dba.idsejour,
+    cl.description as categorielieu,
+    b.description as bouquet,
+    s.description as sejour,
+    a.description as activite,
+    a.prixUnitaire,
+    dba.nombreactivite
 FROM
     bouquet_activite ba
-JOIN bouquet b ON ba.idbouquet = b.idbouquet
-JOIN activite a ON ba.idactivite = a.idactivite
-JOIN categorielieu c ON ba.idcategorielieu = c.idcategorielieu
-JOIN detailbouquet_activite dba ON ba.idbouquetactivite = dba.idbouquetactivite;
+JOIN
 
-
-CREATE VIEW vue_voyage_detail AS
-SELECT
-    v.idvoyage,
-    cl.description AS categorielieu_description,
-    b.description AS bouquet_description,
-    a.description AS activite_description,
-    s.description AS sejour_description,
-    dba.nombreactivite,
-    ba.idbouquetactivite,
-    ba.idactivite,
-    ba.idcategorielieu AS ba_idcategorielieu,
-    dba.iddetailbouquetactivite
-FROM
-    voyage v
+    detailbouquet_activite dba ON ba.idbouquetactivite = dba.idbouquetactivite
 JOIN
-    categorielieu cl ON v.idcategorielieu = cl.idcategorielieu
+    categorielieu cl ON ba.idcategorielieu = cl.idcategorielieu
 JOIN
-    bouquet b ON v.idbouquet = b.idbouquet
-JOIN
-    sejour s ON v.idsejour = s.idsejour
-JOIN
-    bouquet_activite ba ON v.idcategorielieu = ba.idcategorielieu AND v.idbouquet = ba.idbouquet
+    bouquet b ON ba.idbouquet = b.idbouquet
 JOIN
     activite a ON ba.idactivite = a.idactivite
 JOIN
-    detailbouquet_activite dba ON ba.idbouquetactivite = dba.idbouquetactivite;
+    sejour s ON dba.idsejour = s.idsejour;
+
+
+CREATE or replace VIEW vue_voyage_detail as
+SELECT 
+    v.idvoyage,vba.bouquet,vba.categorielieu,vba.sejour,vba.activite,vba.prixUnitaire,vba.nombreActivite
+    from vue_bouquet_activite_detail vba JOIN voyage v ON vba.idcategorielieu = v.idcategorielieu and vba.idbouquet = v.idbouquet and vba.idsejour = v.idsejour; 

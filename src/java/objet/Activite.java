@@ -18,6 +18,7 @@ import java.util.List;
 public class Activite {
     String idActivite;
     String description;
+    double prixUnitaire;
 
     public Activite() {
     }
@@ -35,12 +36,31 @@ public class Activite {
         this.description = description;
     }
 
+    public Activite(String idActivite,String description, double prixUnitaire) {
+        this.idActivite = idActivite;
+        this.description = description;
+        this.prixUnitaire = prixUnitaire;
+    }
+
+    public Activite(String description, double prixUnitaire) {
+        this.description = description;
+        this.prixUnitaire = prixUnitaire;
+    }
+
     public String getIdActivite() {
         return idActivite;
     }
 
     public String getDescription() {
         return description;
+    }
+
+    public double getPrixUnitaire() {
+        return prixUnitaire;
+    }
+
+    public void setPrixUnitaire(double prixUnitaire) {
+        this.prixUnitaire = prixUnitaire;
     }
 
     public void setIdActivite(String idActivite) throws Exception{
@@ -90,9 +110,9 @@ public class Activite {
                 while (resultSet.next()) {
                 String idActivite = resultSet.getString("idactivite");
                 String description = resultSet.getString("description");
-                
+                double prixUnitaire = resultSet.getDouble("prixunitaire");
 
-                Activites.add(new Activite(idActivite,description));
+                Activites.add(new Activite(idActivite,description, prixUnitaire));
             }
                 return Activites;
 
@@ -131,7 +151,7 @@ public class Activite {
             }
             
             //String emp = "EMP";
-            String sql = "INSERT INTO activite(description) VALUES ('"+ this.getDescription()+"');";
+            String sql = "INSERT INTO activite(description, prixunitaire) VALUES ('"+ this.getDescription()+"',"+this.getPrixUnitaire()+");";
             //(nextval('Employerseq')
 
             statement = connection.createStatement();

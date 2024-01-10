@@ -10,31 +10,31 @@ drop table bouquet;
 DROP table categorielieu;
 DROP table activite;
 
-CREATE TABLE genre(
-    idgenre VARCHAR(250) DEFAULT 'genre' || nextval('genreSequence')::TEXT PRIMARY KEY,
-    description VARCHAR(250)
-);
+-- CREATE TABLE genre(
+--     idgenre VARCHAR(250) DEFAULT 'genre' || nextval('genreSequence')::TEXT PRIMARY KEY,
+--     description VARCHAR(250)
+-- );
 
-CREATE TABLE nationalite(
-    idnationalite VARCHAR(250) DEFAULT 'nationalite' || nextval('nationaliteSequence')::TEXT PRIMARY KEY,
-    description VARCHAR(250)
-);
+-- CREATE TABLE nationalite(
+--     idnationalite VARCHAR(250) DEFAULT 'nationalite' || nextval('nationaliteSequence')::TEXT PRIMARY KEY,
+--     description VARCHAR(250)
+-- );
 
-CREATE TABLE personne(
-    idpersonne VARCHAR(250) DEFAULT 'personne' || nextval('personneSequence')::TEXT PRIMARY KEY,
-    idgenre VARCHAR(250),
-    datedenaissance date,
-    adresse VARCHAR(250),
-    idnationalite VARCHAR(250),
-    Foreign key(idgenre) REFERENCES genre(idgenre),
-    Foreign key (idnationalite) REFERENCES nationalite(idnationalite)
-);
+-- CREATE TABLE personne(
+--     idpersonne VARCHAR(250) DEFAULT 'personne' || nextval('personneSequence')::TEXT PRIMARY KEY,
+--     idgenre VARCHAR(250),
+--     datedenaissance date,
+--     adresse VARCHAR(250),
+--     idnationalite VARCHAR(250),
+--     Foreign key(idgenre) REFERENCES genre(idgenre),
+--     Foreign key (idnationalite) REFERENCES nationalite(idnationalite)
+-- );
 
-CREATE TABLE utilisateur(
-    idutilisateur VARCHAR(250) DEFAULT 'utilisateur' || nextval('utilisateurSequence')::TEXT PRIMARY KEY,
-    email VARCHAR(250),
-    mdp VARCHAR(250)
-);
+-- CREATE TABLE utilisateur(
+--     idutilisateur VARCHAR(250) DEFAULT 'utilisateur' || nextval('utilisateurSequence')::TEXT PRIMARY KEY,
+--     email VARCHAR(250),
+--     mdp VARCHAR(250)
+-- );
 -----------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE categorielieu(
@@ -49,10 +49,12 @@ CREATE TABLE bouquet(
 
 CREATE TABLE activite(
     idactivite VARCHAR(250) DEFAULT 'activite' || nextval('activiteSequence')::TEXT PRIMARY KEY,
-    description VARCHAR(250)
+    description VARCHAR(250),
 );
 
-CREATE TABLE bouquet_activite(
+alter table activite add COLUMN prixUnitaire double precision;
+
+CREATE TABLE bouquet_activite(  --bouquet_activite_lieu
     idbouquetActivite VARCHAR(250) DEFAULT 'bouquet_activite' || nextval('bouquet_activiteSequence')::TEXT PRIMARY KEY,
     idbouquet VARCHAR(250),
     idactivite VARCHAR(250),
@@ -62,7 +64,7 @@ CREATE TABLE bouquet_activite(
     Foreign key (idcategorielieu) REFERENCES categorielieu(idcategorielieu)
 );
 
----------------------------------------------------------------------------------------------------------------
+
 
 CREATE TABLE sejour(
     idsejour VARCHAR(250) DEFAULT 'sejour' || nextval('sejourSequence')::TEXT PRIMARY KEY,
@@ -81,7 +83,7 @@ CREATE TABLE voyage(
     Foreign key (idsejour) REFERENCES sejour(idsejour)
 );
 
-CREATE TABLE detailBouquet_activite(
+CREATE TABLE detailBouquet_activite(    --bouquet_activite_lieu fa miaraka @ sejour sy ny nb activite
     iddetailbouquetactivite VARCHAR(250) DEFAULT 'detailBouquet_activite' || nextval('detailBouquet_activiteSequence')::TEXT PRIMARY KEY,
     idbouquetActivite VARCHAR(250),
     idsejour VARCHAR(250),
@@ -90,4 +92,3 @@ CREATE TABLE detailBouquet_activite(
     Foreign key (idsejour) REFERENCES sejour (idsejour)
 );
 
-SELECT currval(pg_get_serial_sequence('bouquet_activite', 'idbouquetactivite')) as last_id;
