@@ -23,7 +23,7 @@
     int counter = 1;
 %>
 
-    <div class="col-lg-6">
+    <div class="col-lg-10">
         <div class="card">
             <div class="card-header">
                 <strong class="card-title">Liste voyage</strong>
@@ -33,20 +33,21 @@
                 <div id="pay-invoice">
                     <div class="card-body">
                         <div class="card-title">
-                            <h3 class="text-center">Liste voyage</h3>
+                            <h3 class="text-center">Entrer les deux montants</h3>
                         </div>
                         <hr>
                         <form action="DetailVoyage" method="post">
-                            <div class="form-group">
-                                <label for="cc-payment" class="control-label mb-1">Montant 1</label>
-                                <input id="cc-payment" name="montant1" type="number" class="form-control" required>
-                            </div>
+                            <div class="row" style="margin-left: 14%;">
+                                <div class="form-group" style="margin-right: 20px;">
+                                    <label for="cc-payment" class="control-label mb-1">Montant 1</label>
+                                    <input id="cc-payment" name="montant1" type="number" class="form-control" style="width: 311px;" required>
+                                </div>
 
-                              <div class="form-group">
-                                <label for="cc-payment" class="control-label mb-1">Montant 2</label>
-                                <input id="cc-payment" name="montant2" type="number" class="form-control" required>
+                                <div class="form-group">
+                                    <label for="cc-payment" class="control-label mb-1">Montant 2</label>
+                                    <input id="cc-payment" name="montant2" type="number" class="form-control" style="width: 311px;" required>
+                                </div>
                             </div>
-                            
                             <div>
                                 <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
                                     <span id="payment-button-amount">Valider</span>
@@ -95,7 +96,7 @@
                                     </div> <!-- /.table-stats -->
                                 </div>
                             </div>
-                                                 <%
+                        <%
                             }
                         %>
                     </div>
