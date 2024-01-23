@@ -91,3 +91,31 @@ CREATE TABLE detailBouquet_activite(
 );
 
 SELECT currval(pg_get_serial_sequence('bouquet_activite', 'idbouquetactivite')) as last_id;
+
+
+--  Table Mpiasa
+     create table mpiasa(
+        idMpiasa Serial Primary Key,
+        nom varchar(25),
+        experience INTEGER
+     );
+
+--  Table Profil
+     create table profil(
+        idprofil Serial Primary Key,
+        description varchar(25)
+     );
+
+--  Table Salaire
+     create table Salaire(
+        idSalaire Serial Primary key,
+        taux decimal(10,2)
+     );
+
+--   Table Profil_salaire
+    create table profil_salaire(
+        idprofil_salaire Serial Primary Key,
+        idprofil foreign key,
+        idsalaire foreign key,
+        valeur INTEGER
+    );
