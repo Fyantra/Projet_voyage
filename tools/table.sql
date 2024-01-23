@@ -107,7 +107,7 @@ SELECT currval(pg_get_serial_sequence('bouquet_activite', 'idbouquetactivite')) 
      );
 
 --  Table Salaire
-     create table Salaire(
+     create table salaire(
         idSalaire Serial Primary key,
         taux decimal(10,2)
      );
@@ -115,7 +115,7 @@ SELECT currval(pg_get_serial_sequence('bouquet_activite', 'idbouquetactivite')) 
 --   Table Profil_salaire
     create table profil_salaire(
         idprofil_salaire Serial Primary Key,
-        idprofil foreign key,
-        idsalaire foreign key,
+        Foreign key(idprofil) REFERENCES profil(idprofil),
+        Foreign key(idsalaire) REFERENCES salaire(idsalaire),
         valeur INTEGER
     );
